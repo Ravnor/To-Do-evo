@@ -16,6 +16,7 @@ Typical ToDo app to practice
 
 
 # Structure?
+```
 /todolist-app
 ├── README.md
 ├── /frontend
@@ -25,13 +26,34 @@ Typical ToDo app to practice
 ├── /sql
 │   └── init_db.sql
 └── .gitignore
+```
+
+backend?
+```
+/todolist-app
+├── index.php
+├── login.php
+├── register.php
+├── logout.php
+├── tasks.php
+├── config.php
+├── db.sql
+├── /partials
+│   └── header.php
+│   └── footer.php
+├── /css
+│   └── style.css
+└── /js
+    └── script.js
+
+```
 
 
 
 
 ## Future improvements
 
-🔧 Ideas para mejorarlo después:
+🔧 Maybe when the basics are finished.
 
     API RESTful for Tasks
 
