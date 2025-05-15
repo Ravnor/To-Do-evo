@@ -1,0 +1,13 @@
+{
+  "name": "ravnor/todolist-app",
+  "description": "TAKS TODO APP With PHP and Mysql",
+  "type": "project",
+  "require": {},
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ravnor",
+      "email": "NOPE"
+    }
+  ]
+}
