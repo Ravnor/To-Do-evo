@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $userId = $_SESSION['user_id'];
 
-// Agregar tarea
+// adds task
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {
     $title = trim($_POST['title']);
     $description = trim($_POST['description']);
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {
     exit;
 }
 
-// Marcar como completada
+// Mark as completed
 if (isset($_GET['complete'])) {
     $stmt = $pdo->prepare("UPDATE tasks SET completed = 1 WHERE id = ? AND user_id = ?");
     $stmt->execute([$_GET['complete'], $userId]);
@@ -27,7 +27,7 @@ if (isset($_GET['complete'])) {
     exit;
 }
 
-// Eliminar tarea
+// Remove task
 if (isset($_GET['delete'])) {
     $stmt = $pdo->prepare("DELETE FROM tasks WHERE id = ? AND user_id = ?");
     $stmt->execute([$_GET['delete'], $userId]);
@@ -35,7 +35,7 @@ if (isset($_GET['delete'])) {
     exit;
 }
 
-// Filtro
+// Filter
 $filter = $_GET['filter'] ?? 'all';
 $query = "SELECT * FROM tasks WHERE user_id = ?";
 $params = [$userId];
@@ -52,18 +52,18 @@ $stmt->execute($params);
 $tasks = $stmt->fetchAll();
 ?>
 
-<h2>Mis Tareas</h2>
+<h2>My Tasks</h2>
 
 <form method="post">
     <input type="text" name="title" required placeholder="Título">
     <textarea name="description" placeholder="Descripción"></textarea>
-    <button type="submit">Agregar Tarea</button>
+    <button type="submit">Add Task</button>
 </form>
 
 <p>
-    <a href="?filter=all">Todas</a> |
-    <a href="?filter=completed">Completadas</a> |
-    <a href="?filter=pending">Pendientes</a>
+    <a href="?filter=all">All</a> |
+    <a href="?filter=completed">Completed</a> |
+    <a href="?filter=pending">Pending</a>
 </p>
 
 <ul>
@@ -73,13 +73,13 @@ $tasks = $stmt->fetchAll();
         <?php if ($task['completed']): ?>
             ✅
         <?php else: ?>
-            <a href="?complete=<?= $task['id'] ?>">[Marcar completada]</a>
+            <a href="?complete=<?= $task['id'] ?>">[Mark as Completed]</a>
         <?php endif; ?>
-        <a href="?delete=<?= $task['id'] ?>">[Eliminar]</a>
+        <a href="?delete=<?= $task['id'] ?>">[Delete]</a>
         <p><?= nl2br(htmlspecialchars($task['description'])) ?></p>
     </li>
 <?php endforeach; ?>
 </ul>
 
-<p><a href="logout.php">Cerrar sesión</a></p>
+<p><a href="logout.php">Log Out</a></p>
 
