@@ -51,3 +51,35 @@ $stmt = $pdo->prepare($query);
 $stmt->execute($params);
 $tasks = $stmt->fetchAll();
 ?>
+
+<h2>Mis Tareas</h2>
+
+<form method="post">
+    <input type="text" name="title" required placeholder="Título">
+    <textarea name="description" placeholder="Descripción"></textarea>
+    <button type="submit">Agregar Tarea</button>
+</form>
+
+<p>
+    <a href="?filter=all">Todas</a> |
+    <a href="?filter=completed">Completadas</a> |
+    <a href="?filter=pending">Pendientes</a>
+</p>
+
+<ul>
+<?php foreach ($tasks as $task): ?>
+    <li>
+        <strong><?= htmlspecialchars($task['title']) ?></strong>
+        <?php if ($task['completed']): ?>
+            ✅
+        <?php else: ?>
+            <a href="?complete=<?= $task['id'] ?>">[Marcar completada]</a>
+        <?php endif; ?>
+        <a href="?delete=<?= $task['id'] ?>">[Eliminar]</a>
+        <p><?= nl2br(htmlspecialchars($task['description'])) ?></p>
+    </li>
+<?php endforeach; ?>
+</ul>
+
+<p><a href="logout.php">Cerrar sesión</a></p>
+
