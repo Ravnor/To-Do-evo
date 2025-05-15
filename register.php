@@ -20,3 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
+
+<!-- HTML del formulario -->
+<h2>Registro</h2>
+<form method="post">
+    <input type="text" name="username" required placeholder="Usuario">
+    <input type="password" name="password" required placeholder="Contraseña">
+    <button type="submit">Registrar</button>
+</form>
+<?php if (!empty($error)) echo "<p>$error</p>"; ?>
